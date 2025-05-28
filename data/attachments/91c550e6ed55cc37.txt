@@ -1,0 +1,89 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: test deep sleep formel selection reflects correctly
+- Location: /home/runner/work/Mozart-Automation/Mozart-Automation/tests/verify_deep_sleep_formel_selection_in_boxspring_configurator.spec.ts:60:1
+
+# Error details
+
+```
+Error: locator.click: Test timeout of 120000ms exceeded.
+Call log:
+  - waiting for locator('[href="/build/boxspringbett/topper"]')
+    - locator resolved to <a data-sentry-element="Link" data-sentry-component="NavbarLink" data-sentry-source-file="link.tsx" href="/build/boxspringbett/topper" class="ab-mozart-screen-tab-7 mozart-screen-topper block shrink-0 whitespace-nowrap rounded-full px-2 py-1 font-semibold text-[15px] text-secondary transition-colors hover:text-accent">Härtegrad & Topper</a>
+  - attempting click action
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div id="BorlabsDialogBackdrop" class="brlbs-cmpnt-dialog-backdrop brlbs-cmpnt-animation-fade-backdrop-enter-active brlbs-cmpnt-animation-fade-backdrop-enter-to"></div> from <div data-v-app="" data-nosnippet="true" id="BorlabsCookieBox" data-borlabs-cookie-disable-dialog="false" data-borlabs-cookie-consent-required="true">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div id="BorlabsDialogBackdrop" class="brlbs-cmpnt-dialog-backdrop"></div> from <div data-v-app="" data-nosnippet="true" id="BorlabsCookieBox" data-borlabs-cookie-disable-dialog="false" data-borlabs-cookie-consent-required="true">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="BorlabsDialogBackdrop" class="brlbs-cmpnt-dialog-backdrop"></div> from <div data-v-app="" data-nosnippet="true" id="BorlabsCookieBox" data-borlabs-cookie-disable-dialog="false" data-borlabs-cookie-consent-required="true">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    227 × waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+        - <div id="BorlabsDialogBackdrop" class="brlbs-cmpnt-dialog-backdrop"></div> from <div data-v-app="" data-nosnippet="true" id="BorlabsCookieBox" data-borlabs-cookie-disable-dialog="false" data-borlabs-cookie-consent-required="true">…</div> subtree intercepts pointer events
+      - retrying click action
+        - waiting 500ms
+
+    at ProductBuilder.openHardTopperTab (/home/runner/work/Mozart-Automation/Mozart-Automation/src/pageObjects/productBuilder/productBuilder.ts:9:19)
+    at /home/runner/work/Mozart-Automation/Mozart-Automation/tests/verify_deep_sleep_formel_selection_in_boxspring_configurator.spec.ts:66:5
+```
+
+# Page snapshot
+
+```yaml
+- alertdialog "Datenschutz-Präferenz":
+  - document:
+    - heading "Datenschutz-Präferenz" [level=2]
+    - paragraph: Wir benötigen Ihre Einwilligung, bevor Sie unsere Website weiter besuchen können.
+    - paragraph: Wir verwenden Cookies und andere Technologien auf unserer Website. Einige von ihnen sind essenziell, während andere uns helfen, diese Website und Ihre Erfahrung zu verbessern.
+    - paragraph: Personenbezogene Daten können bspw. für personalisierte Werbung verarbeitet werden.
+    - paragraph:
+      - text: Weitere Informationen über die Verwendung Ihrer Daten finden Sie in unserer
+      - link "Datenschutzerklärung"
+      - text: .
+    - paragraph:
+      - text: Sie können Ihre Auswahl jederzeit unter
+      - button "Einstellungen"
+      - text: widerrufen oder anpassen.
+    - button "Alles akzeptieren"
+    - button "Nur essenzielle Cookies akzeptieren"
+```
+
+# Test source
+
+```ts
+   1 | import {BasePage} from "../basePage";
+   2 |
+   3 | export class ProductBuilder extends BasePage {
+   4 |     private readonly hardTopperTab: string = '[href="/build/boxspringbett/topper"]';
+   5 |
+   6 |     async openHardTopperTab() {
+   7 |         const tab = await this.getElementByLocator(this.hardTopperTab);
+   8 |         await tab.scrollIntoViewIfNeeded();
+>  9 |         await tab.click();
+     |                   ^ Error: locator.click: Test timeout of 120000ms exceeded.
+  10 |     }
+  11 | }
+  12 |
+```

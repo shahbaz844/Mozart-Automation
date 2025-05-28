@@ -1,1 +1,1 @@
-[{"uid":"2c0e416da45f009d","name":"test deep sleep formel selection reflects correctly","time":{"start":1748433563591,"stop":1748433565343,"duration":1752},"status":"failed","severity":"normal"}]
+[{"uid":"1e1401f91da320f7","name":"test deep sleep formel selection reflects correctly","time":{"start":1748434025239,"stop":1748434145626,"duration":120387},"status":"broken","severity":"normal"}]
