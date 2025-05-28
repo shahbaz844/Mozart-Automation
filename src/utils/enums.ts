@@ -1,0 +1,6 @@
+export enum Timeout {
+  ONE_SECOND = 1000,
+  TWO_SECONDS = 2000,
+  THREE_SECONDS = 3000,
+  THIRTY_SECONDS =30000,
+}
