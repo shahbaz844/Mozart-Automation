@@ -59,7 +59,7 @@ import { home } from "../src/testData/homeTestData/home";
 
 test('test deep sleep formel selection reflects correctly', async ({ homePage, productBuilder, hardnessPage, upgradesPage, accessoriesPage, overviewPage }) => {
     await homePage.visit(home.url);
-    await homePage.waitForReadiness();
+    // await homePage.waitForReadiness();
     await homePage.selectPostalCode(home.postcode);
     await homePage.acceptCookies();
     await homePage.closeEmailPopup();
