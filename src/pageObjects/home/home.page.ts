@@ -20,7 +20,7 @@ export class HomePage extends BasePage {
   }
 
   async acceptCookies() {
-    const acceptCookies = this.page.getByRole('button', { name: this.allCookies });
+    const acceptCookies = this.page.getByRole('button', { name: "Alles akzeptieren" });
     if (await acceptCookies.isVisible()) {
       await acceptCookies.click();
     }
