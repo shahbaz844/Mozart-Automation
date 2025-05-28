@@ -1,2 +1,2 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","120243","test deep sleep formel selection reflects correctly","chromium","Wed May 28 11:48:29 GMT 2025","broken","Wed May 28 11:50:29 GMT 2025","","verify_deep_sleep_formel_selection_in_boxspring_configurator.spec.ts","",""
+"","1625","test deep sleep formel selection reflects correctly","chromium","Wed May 28 11:55:14 GMT 2025","failed","Wed May 28 11:55:16 GMT 2025","","verify_deep_sleep_formel_selection_in_boxspring_configurator.spec.ts","",""
