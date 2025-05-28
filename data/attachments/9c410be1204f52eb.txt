@@ -1,0 +1,108 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: test deep sleep formel selection reflects correctly
+- Location: /home/runner/work/Mozart-Automation/Mozart-Automation/tests/verify_deep_sleep_formel_selection_in_boxspring_configurator.spec.ts:60:1
+
+# Error details
+
+```
+Error: locator.click: Test timeout of 120000ms exceeded.
+Call log:
+  - waiting for locator('button.h-10').first()
+    - locator resolved to <button type="button" data-sentry-element="Option" data-sentry-component="Option" data-sentry-source-file="mattress-hardness.tsx" class="flex h-10 items-center justify-between rounded-sm border bg-white px-4">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="BorlabsDialogBackdrop" class="brlbs-cmpnt-dialog-backdrop"></div> from <div data-v-app="" data-nosnippet="true" id="BorlabsCookieBox" data-borlabs-cookie-disable-dialog="false" data-borlabs-cookie-consent-required="true">…</div> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="BorlabsDialogBackdrop" class="brlbs-cmpnt-dialog-backdrop"></div> from <div data-v-app="" data-nosnippet="true" id="BorlabsCookieBox" data-borlabs-cookie-disable-dialog="false" data-borlabs-cookie-consent-required="true">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    223 × waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+        - <div id="BorlabsDialogBackdrop" class="brlbs-cmpnt-dialog-backdrop"></div> from <div data-v-app="" data-nosnippet="true" id="BorlabsCookieBox" data-borlabs-cookie-disable-dialog="false" data-borlabs-cookie-consent-required="true">…</div> subtree intercepts pointer events
+      - retrying click action
+        - waiting 500ms
+
+    at HardnessAndTopperTab.openHardnessDropdown (/home/runner/work/Mozart-Automation/Mozart-Automation/src/pageObjects/productBuilder/hardnessAndTopper.tab.ts:14:32)
+    at /home/runner/work/Mozart-Automation/Mozart-Automation/tests/verify_deep_sleep_formel_selection_in_boxspring_configurator.spec.ts:68:5
+```
+
+# Page snapshot
+
+```yaml
+- alertdialog "Datenschutz-Präferenz":
+  - document:
+    - heading "Datenschutz-Präferenz" [level=2]
+    - paragraph: Wir benötigen Ihre Einwilligung, bevor Sie unsere Website weiter besuchen können.
+    - paragraph: Wir verwenden Cookies und andere Technologien auf unserer Website. Einige von ihnen sind essenziell, während andere uns helfen, diese Website und Ihre Erfahrung zu verbessern.
+    - paragraph: Personenbezogene Daten können bspw. für personalisierte Werbung verarbeitet werden.
+    - paragraph:
+      - text: Weitere Informationen über die Verwendung Ihrer Daten finden Sie in unserer
+      - link "Datenschutzerklärung"
+      - text: .
+    - paragraph:
+      - text: Sie können Ihre Auswahl jederzeit unter
+      - button "Einstellungen"
+      - text: widerrufen oder anpassen.
+    - button "Alles akzeptieren"
+    - button "Nur essenzielle Cookies akzeptieren"
+```
+
+# Test source
+
+```ts
+   1 | import {ProductBuilder} from "./productBuilder";
+   2 |
+   3 | export class HardnessAndTopperTab extends ProductBuilder {
+   4 |     private readonly hardness: string = 'button.h-10';
+   5 |     private readonly hardnessMattress1: string = 'div.pr-4 b';
+   6 |     private readonly hardnessMattress2: string = 'div.pl-4 b';
+   7 |     private readonly saveHardnessButton: string = 'button .mozart-button-content';
+   8 |     private readonly antiAllergicCoverOption: string = 'label[for="topper_gel"]';
+   9 |     protected readonly continueButton: string = '[data-sentry-component="ContinueButton"]';
+  10 |
+  11 |     async openHardnessDropdown(): Promise<void> {
+  12 |         const hardnessDropdown = (await this.getElementByLocator(this.hardness)).first();
+  13 |         await hardnessDropdown.waitFor();
+> 14 |         await hardnessDropdown.click();
+     |                                ^ Error: locator.click: Test timeout of 120000ms exceeded.
+  15 |     }
+  16 |
+  17 |     async selectHardnessForMattress1(hardness: string): Promise<void> {
+  18 |         await this.page.locator(this.hardnessMattress1).filter({hasText: hardness}).first().click();
+  19 |     }
+  20 |
+  21 |     async selectHardnessForMattress2(hardness: string): Promise<void> {
+  22 |         await this.page.locator(this.hardnessMattress2).filter({hasText: hardness}).first().click();
+  23 |     }
+  24 |
+  25 |     async saveHardnessLevel(): Promise<void> {
+  26 |         await this.page.locator(this.saveHardnessButton).last().click();
+  27 |     }
+  28 |
+  29 |     async selectAntiAllergicCoverOption(): Promise<void> {
+  30 |         await this.waitForVisible(this.antiAllergicCoverOption);
+  31 |         await this.clickElement(this.antiAllergicCoverOption);
+  32 |     }
+  33 |
+  34 |     async continueToUpgrades(): Promise<void> {
+  35 |         await this.clickElement(this.continueButton);
+  36 |     }
+  37 | }
+```
