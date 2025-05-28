@@ -24,12 +24,12 @@ export default defineConfig({
     ],
     // ["html"],
   ],
-  timeout: 120000,
+  timeout: 60000,
   use: {
     trace: "on-first-retry",
-    actionTimeout:200000,
+    actionTimeout: 60000,
     headless: true,
-    navigationTimeout: 120000,
+    navigationTimeout: 30000,
     video: "retain-on-failure",
     screenshot: "only-on-failure",
     contextOptions: {
