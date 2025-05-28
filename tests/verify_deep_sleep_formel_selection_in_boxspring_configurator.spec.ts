@@ -61,7 +61,7 @@ test('test deep sleep formel selection reflects correctly', async ({ page, homeP
     await homePage.visit(home.url);
     await homePage.waitForReadiness();
     
-    await page.locator('button[type="submit"]').first().click({force: true)};
+    await page.locator('button[type="submit"]').first().click({force: true});
 
    // const plzButton = page.locator('button:has-text("PLZ 1")'); // or use "PLZ 1..." if exact text needed
    //  if (await plzButton.isVisible()) {
