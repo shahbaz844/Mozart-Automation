@@ -63,15 +63,16 @@ test('test deep sleep formel selection reflects correctly', async ({ page, homeP
     
     await page.locator('button[type="submit"]').first().click({force: true});
 
+    await page.locator('[role="document"] button').nth(1).click({force: true});
    // const plzButton = page.locator('button:has-text("PLZ 1")'); // or use "PLZ 1..." if exact text needed
    //  if (await plzButton.isVisible()) {
    //      await plzButton.click();
    //  }
 
-    const acceptCookies = page.getByRole('button', { name: 'Alles akzeptieren' });
-    if (await acceptCookies.isVisible()) {
-        await acceptCookies.click();
-    }
+    // const acceptCookies = page.getByRole('button', { name: 'Alles akzeptieren' });
+    // if (await acceptCookies.isVisible()) {
+    //     await acceptCookies.click();
+    // }
 
     // await homePage.selectPostalCode(home.postcode);
     // await homePage.acceptCookies();
