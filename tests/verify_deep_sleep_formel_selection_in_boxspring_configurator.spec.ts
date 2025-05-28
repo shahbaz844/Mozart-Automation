@@ -57,11 +57,24 @@ import { home } from "../src/testData/homeTestData/home";
  */
 
 
-test('test deep sleep formel selection reflects correctly', async ({ homePage, productBuilder, hardnessPage, upgradesPage, accessoriesPage, overviewPage }) => {
+test('test deep sleep formel selection reflects correctly', async ({ page, homePage, productBuilder, hardnessPage, upgradesPage, accessoriesPage, overviewPage }) => {
     await homePage.visit(home.url);
     await homePage.waitForReadiness();
-    await homePage.selectPostalCode("PLZ 1...");
-    await homePage.acceptCookies();
+    
+    await page.locator('button[type="submit"]').first().click({force: true)};
+
+   // const plzButton = page.locator('button:has-text("PLZ 1")'); // or use "PLZ 1..." if exact text needed
+   //  if (await plzButton.isVisible()) {
+   //      await plzButton.click();
+   //  }
+
+    const acceptCookies = page.getByRole('button', { name: 'Alles akzeptieren' });
+    if (await acceptCookies.isVisible()) {
+        await acceptCookies.click();
+    }
+
+    // await homePage.selectPostalCode(home.postcode);
+    // await homePage.acceptCookies();
     // await homePage.closeEmailPopup();
 
     await productBuilder.openHardTopperTab();
